@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Domine');
+
+body {
+  background: #DFE8CF;
+  padding-top: 70px;
+  margin: auto;
+  width: 50%;
+  text-align: center;
+}
+
+h1 {
+  font-family: 'Domine', serif;
+}
