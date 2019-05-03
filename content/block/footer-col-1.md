@@ -1,3 +1,3 @@
-#### Fot1
+#### Github
 
-Här är footer 1.
+[Länk till github](https://github.com/erikatberns)

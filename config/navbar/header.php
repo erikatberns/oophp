@@ -39,25 +39,30 @@ return [
             "title" => "Om denna webbplats.",
         ],
         [
-            "text" => "Spel",
+            "text" => "Gissa-spel",
             "url" => "guess-game",
             "title" => "Gissa nummer.",
         ],
         [
-            "text" => "Styleväljare",
-            "url" => "style",
-            "title" => "Välj stylesheet.",
+            "text" => "100-spelet",
+            "url" => "game",
+            "title" => "100-spelet.",
         ],
+        // [
+        //     "text" => "Styleväljare",
+        //     "url" => "style",
+        //     "title" => "Välj stylesheet.",
+        // ],
         [
             "text" => "Docs",
             "url" => "dokumentation",
             "title" => "Dokumentation av ramverk och liknande.",
         ],
-        [
-            "text" => "Test &amp; Lek",
-            "url" => "lek",
-            "title" => "Testa och lek med test- och exempelprogram",
-        ],
+        // [
+        //     "text" => "Test &amp; Lek",
+        //     "url" => "lek",
+        //     "title" => "Testa och lek med test- och exempelprogram",
+        // ],
         [
             "text" => "Anax dev",
             "url" => "dev",
