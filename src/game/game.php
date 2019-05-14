@@ -17,6 +17,7 @@ class game
     public $sumRes;
     public $randomSum;
     public $compStatus;
+    // public $array = array();
 
 /**
  * Constructor to initiate the dicehand with a number of dices.
@@ -51,7 +52,17 @@ class game
             array_push($this->valuesComp, rand(1, 6));
         };
     }
-
+/**
+ * Roll all dices save their value.
+ *
+ * @return void.
+ */
+    public function rollAgain()
+    {
+        for ($i = 0; $i < 2; $i++) {
+            array_push($this->valuesComp, rand(1, 6));
+        };
+    }
 /**
  * Get values of dices from last roll.
  *
@@ -97,7 +108,7 @@ class game
     public function checkDice($dice)
     {
         if (in_array(1, $dice)) {
-            $this->res = "tärningskastet innehåller en etta, inga poäng sparas.";
+            $this->res = "tärningskastet innehåller en etta, inga poäng sparas. (" . implode(", ", $this->valuesComp) . ")";
             $this->computerDice();
         } else {
             $this->res = implode(", ", $dice);
@@ -110,12 +121,18 @@ class game
     {
         if (in_array(1, $this->valuesComp)) {
               $this->randomSum = null;
-              $this->compStatus = "Dator slog en etta, inga poäng sparas.";
+              $this->compStatus = "Dator slog en etta, inga poäng sparas. (" . implode(", ", $this->valuesComp) . ")";
         } else {
-              $this->randomSum = array_sum($this->valuesComp);
-              $this->compStatus = "Dator har sparat.";
+            if (array_sum($this->valuesComp) < settype($this->average, 'integer')) {
+                  $this->rollAgain();
+                  $this->computerDice();
+            } else {
+                $this->randomSum = array_sum($this->valuesComp);
+                $this->compStatus = "Dator har sparat. (" . implode(", ", $this->valuesComp) . ")";
+            }
         }
     }
+
 
     public function getRandomSum()
     {
@@ -136,8 +153,20 @@ class game
  *
  * @return float as the average of all dices.
  */
-    public function average($dices = 5)
+
+    public function printHist(array $array)
     {
-          return array_sum($this->values)/$dices;
+          sort($array);
+          $this->resHist = array();
+        foreach (array_count_values($array) as $key => $value) {
+              array_push($this->resHist, $key.":". str_repeat("*", $value) . "<br>");
+        }
+        // $array = array_merge($this->values, $this->valuesComp, $array);
+        return $this->resHist;
+    }
+    public function average(array $array)
+    {
+        $this->average = array_sum($array)/count($array);
+        return round($this->average, 1);
     }
 }

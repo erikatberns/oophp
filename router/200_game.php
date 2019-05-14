@@ -35,6 +35,8 @@ $app->router->get("game/player", function () use ($app) {
     $savedSumComp        = $_SESSION["savedSumComp"] ?? null;
     $res        = $_SESSION["res"] ?? null;
     $resComp        = $_SESSION["resComp"] ?? null;
+    $histogram        = $_SESSION["histogram"] ?? null;
+    $statistik        = $_SESSION["statistik"] ?? null;
 
     $_SESSION["dice"] = null;
     $_SESSION["doInit"] = null;
@@ -47,6 +49,8 @@ $app->router->get("game/player", function () use ($app) {
     "savedSum" => $savedSum ?? null,
     "savedSumComp" => $savedSumComp ?? null,
     "savePoints" => $savePoints ?? null,
+    "histogram" => $histogram ?? array(),
+    "statistik" => $statistik ?? null,
     ];
 
     $app->page->add("game/player", $data);
@@ -62,6 +66,10 @@ $app->router->get("game/player", function () use ($app) {
  */
 $app->router->post("game/player", function () use ($app) {
     $title = "Play the game";
+    $game = new \Erika\game\game();
+    $game->roll();
+    $game->computerDice();
+
 
     //Deal with incoming variables
     $rollDices        = $_POST["rollDices"] ?? null;
@@ -70,9 +78,6 @@ $app->router->post("game/player", function () use ($app) {
 
 
     if (isset($rollDices)) {
-        $game = new \Erika\game\game();
-        $game->roll();
-        $game->computerDice();
         $_SESSION["rollDices"] = $rollDices;
         $_SESSION["dice"] = $game->values();
         $_SESSION["sum"] = $game->sum($_SESSION["dice"]);
@@ -80,19 +85,23 @@ $app->router->post("game/player", function () use ($app) {
         $_SESSION["res"] = $game->res;
         $_SESSION["resComp"] = $game->getCompStatus();
         $_SESSION["savedSumComp"] += $game->getRandomSum();
+        $_SESSION["array"] = array_merge($game->values, $_SESSION["array"]);
+        $_SESSION["histogram"] = $game->printHist($_SESSION["array"]);
+        $_SESSION["statistik"] = $game->average($_SESSION["array"]);
     } if (isset($doInit)) {
-        $game = new \Erika\game\game();
         $_SESSION["sum"] = null;
         $_SESSION["rollDices"] = null;
         $_SESSION["savedSum"] = null;
         $_SESSION["savedSumComp"] = null;
+        $_SESSION["array"] = array();
+        $_SESSION["histogram"] = $_SESSION["array"];
+        $_SESSION["statistik"] = null;
     } if (isset($savePoints)) {
-        $game = new \Erika\game\game();
-        $game->roll();
-        $game->computerDice();
-
         $_SESSION["savedSum"] += $_SESSION["sum"];
         $_SESSION["resComp"] = $game->getCompStatus();
+        $_SESSION["array"] = array_merge($game->valuesComp, $_SESSION["array"]);
+        $_SESSION["histogram"] = $game->printHist($_SESSION["array"]);
+        $_SESSION["statistik"] = $game->average($_SESSION["array"]);
         $_SESSION["savedSumComp"] += $game->getRandomSum();
     }
     return $app->response->redirect("game/player");

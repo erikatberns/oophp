@@ -39,3 +39,7 @@ if ($savedSum == 100 || $savedSum > 100) {?>
         <?= $savedSumComp?></p>
     <?php endif;
 }?>
+
+<pre><?php print_r($histogram) ?></pre>
+<!-- <pre>medelvärde: <?php print_r($statistik) ?></pre> -->
+<!-- <pre><?php var_dump($histogram) ?></pre> -->
