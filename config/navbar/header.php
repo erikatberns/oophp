@@ -34,6 +34,11 @@ return [
             "url" => "game",
             "title" => "100-spelet.",
         ],
+        [
+            "text" => "Filmer",
+            "url" => "movie",
+            "title" => "Filmer.",
+        ],
         // [
         //     "text" => "Styleväljare",
         //     "url" => "style",

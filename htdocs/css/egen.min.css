@@ -222,6 +222,10 @@ legend {
   white-space: normal;
   /* 1 */
 }
+
+.thumb {
+    width: 300px;
+}
 /**
  * Add the correct vertical alignment in Chrome, Firefox, and Opera.
  */
@@ -5270,7 +5274,7 @@ figure.figure.right {
 .region-header-col-2 {
   display: inline;
   float: left;
-  width: 73.95833333%;
+  width: 100%;
   margin-left: 0.52083333%;
   margin-right: 0.52083333%;
   margin-left: 4.6875%;
@@ -5797,3 +5801,9 @@ ul.toc li a:hover {
 /** --------------------------------------------------------------
  * Figure through .figure
  */
+
+
+
+.row {
+  padding-top: 50px;
+}
