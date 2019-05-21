@@ -39,6 +39,16 @@ return [
             "url" => "movie",
             "title" => "Filmer.",
         ],
+        [
+            "text" => "Textfilter",
+            "url" => "Textfilter",
+            "title" => "Textfilter",
+        ],
+        [
+            "text" => "Content",
+            "url" => "Content",
+            "title" => "Content",
+        ],
         // [
         //     "text" => "Styleväljare",
         //     "url" => "style",
